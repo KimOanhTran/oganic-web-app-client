@@ -51,7 +51,7 @@ const ProductsPage = (props: any) => {
         <img
           src={cateInfo?.image_url}
           alt=""
-          className="w-full h-full object-contain rounded"
+          className="w-full h-full object-cover rounded"
         />
       </div>
       {/* Filter */}

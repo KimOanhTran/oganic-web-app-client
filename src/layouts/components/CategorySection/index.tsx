@@ -61,7 +61,7 @@ const CategorySection = (props: Props) => {
                 <a className="h-full">
                   <Flex
                     alignItem="center"
-                    className={`h-full transition duration-200 ease-in gap-2 justify-center rounded-[5px] cursor-pointer bg-[#fffd7f] hover:bg-[#fff] hover:border-2 hover:border-[#000]`}
+                    className={`h-full transition duration-200 ease-in gap-2 justify-center rounded-[5px] cursor-pointer bg-[#fff] hover:bg-[#fff] border-2 border-[#008848] hover:border-2 hover:border-[#000]`}
                   >
                     <span className="h-[24px] w-[24px]">
                       <img
@@ -70,7 +70,7 @@ const CategorySection = (props: Props) => {
                         className="h-full w-full object-contain"
                       />
                     </span>
-                    <span className="text-[#000]">{cate.name}</span>
+                    <span className="text-[#008848]">{cate.name}</span>
                   </Flex>
                 </a>
               </Link>

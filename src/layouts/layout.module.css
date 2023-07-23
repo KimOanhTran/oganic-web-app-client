@@ -85,14 +85,14 @@
   left: 0;
   z-index: 10;
   visibility: hidden;
-  background-color: #fff;
+  background-color: transparent;
   width: calc(100vw - 40px);
   max-width: calc(1500px - 100px);
-  border: 1px solid rgb(212, 212, 212);
+  /* border: 1px solid rgb(212, 212, 212); */
   border-radius: 5px;
   max-height: 500px;
   transition: all 0.1s ease-out;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; */
 }
 .all_categories__panel.show {
   visibility: visible;

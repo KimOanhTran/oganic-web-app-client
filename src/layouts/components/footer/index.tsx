@@ -6,66 +6,66 @@ const Footer = () => {
   return (
     <footer className="mt-auto">
       {/* main content footer */}
-      <section className="bg-[#fffd7f]">
+      <section className="bg-[#f7f7f7]">
         <div className="container mx-auto">
           <div className="py-[5px] px-[20px]">
             <div className="grid grid-cols-4 gap-2">
               <div className="col-span-1">
-                <h5 className="font-medium text-[20px]">Sản phẩm</h5>
+                <h5 className="font-medium text-[20px]">Hệ thống cửa hàng</h5>
                 <ul className="mt-[8px]">
                   <li className="my-[8px]">
                     <Link href="#!">
-                      <a className="text-black">Điện thoại</a>
+                      <a className="text-black">Organicfood Quận 2</a>
                     </Link>
                   </li>
                   <li className="my-[8px]">
                     <Link href="#!">
-                      <a className="text-black">Laptop</a>
+                      <a className="text-black">Organicfood Quận 1</a>
                     </Link>
                   </li>
                   <li className="my-[8px]">
                     <Link href="#!">
-                      <a className="text-black">Tablet</a>
+                      <a className="text-black">Organicfood Quận 3</a>
                     </Link>
                   </li>
                   <li className="my-[8px]">
                     <Link href="#!">
-                      <a className="text-black">Máy để bàn</a>
+                      <a className="text-black">Organicfood Quận 9</a>
                     </Link>
                   </li>
                   <li className="my-[8px]">
                     <Link href="#!">
-                      <a className="text-black">Đồng hồ</a>
+                      <a className="text-black">Organicfood DakLak</a>
                     </Link>
                   </li>
                 </ul>
               </div>
               <div className="col-span-1">
-                <h5 className="font-medium text-[20px]">Dịch vụ</h5>
+                <h5 className="font-medium text-[20px]">Về Organicfood</h5>
                 <ul className="mt-[8px]">
                   <li className="my-[8px]">
                     <Link href="#!">
-                      <a className="text-black">Đóng tiền</a>
+                      <a className="text-black">Giới Thiệu Organicfood</a>
                     </Link>
                   </li>
                   <li className="my-[8px]">
                     <Link href="#!">
-                      <a className="text-black">Internet</a>
+                      <a className="text-black">Làm việc với chúng tôi</a>
                     </Link>
                   </li>
                   <li className="my-[8px]">
                     <Link href="#!">
-                      <a className="text-black">Nạp thẻ</a>
+                      <a className="text-black">Chính sách bảo mật</a>
                     </Link>
                   </li>
                   <li className="my-[8px]">
                     <Link href="#!">
-                      <a className="text-black">Mua vé tàu</a>
+                      <a className="text-black">Điều khoản dịch vụ</a>
                     </Link>
                   </li>
                   <li className="my-[8px]">
                     <Link href="#!">
-                      <a className="text-black">Sim số</a>
+                      <a className="text-black">Liên hệ</a>
                     </Link>
                   </li>
                 </ul>
@@ -90,7 +90,7 @@ const Footer = () => {
                   </li>
                   <li className="my-[8px]">
                     <Link href="#!">
-                      <a className="text-black">Chính sách bảo hành</a>
+                      <a className="text-black">Chính sách bảo mật</a>
                     </Link>
                   </li>
                   <li className="my-[8px]">
@@ -102,7 +102,20 @@ const Footer = () => {
               </div>
               <div className="col-span-1">
                 <h5 className="font-medium text-[20px]">Liên hệ</h5>
-                <div className="mt-[8px]"></div>
+                <ul className="mt-[8px]">
+                  <li className="my-[8px]">
+                    <Link href="#!">
+                      <a className="text-black">Thời gian tư vấn: 7h - 20h</a>
+                    </Link>
+                  </li>
+                  <li className="my-[8px]">
+                    <Link href="#!">
+                      <a className="text-black">
+                        Thời gian giao hàng: 7h30 - 20h
+                      </a>
+                    </Link>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
@@ -114,7 +127,7 @@ const Footer = () => {
           <div className="py-[5px] px-[20px]">
             <Flex alignItem="center" justifyContent="center">
               <span className="text-white text-[14px]">
-                © {DateJS.getYear()} Dabit Electronic. All rights reserved.
+                © {DateJS.getYear()} Store Organic Food. All rights reserved.
               </span>
             </Flex>
           </div>

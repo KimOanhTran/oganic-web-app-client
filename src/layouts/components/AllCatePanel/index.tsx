@@ -85,7 +85,7 @@ const AllCatePanel = ({ categories = [] }: Props) => {
       id="all_categories__panel"
     >
       <div className="grid grid-cols-5">
-        <div className="col-span-1 bg-[#fffd7f] rounded-tl-[5px] rounded-bl-[5px]">
+        <div className="col-span-1 bg-[#f7f7f7] rounded-tl-[5px] rounded-bl-[5px]">
           <ul>
             {categories.map((_cate, cateIndex) => (
               <li
@@ -113,7 +113,7 @@ const AllCatePanel = ({ categories = [] }: Props) => {
             ))}
           </ul>
         </div>
-        <div className="col-span-4 p-[10px] cursor-default">
+        {/* <div className="col-span-4 p-[10px] cursor-default">
           {cate ? (
             <div className="grid grid-cols-5 gap-5 h-full">
               {cate.image_url ? (
@@ -143,7 +143,7 @@ const AllCatePanel = ({ categories = [] }: Props) => {
               </span>
             </Flex>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );

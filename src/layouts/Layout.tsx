@@ -178,7 +178,7 @@ const Layout = (props: Props) => {
           <div className="container my-5 px-[20px]">{children}</div>
         </main>
         {/* footer */}
-        {/* <Footer /> */}
+        <Footer />
 
         <ModalContainer modalKey={MODAL_KEYS.MODAL_LOGIN} animation="fade">
           <ModalLogin />
@@ -190,7 +190,8 @@ const Layout = (props: Props) => {
           <DrawerCart />
         </DrawerContainer> */}
 
-        {signedIn && (
+        {/* chat */}
+        {/* {signedIn && (
           <div className="fixed bottom-5 shadow-lg right-5 rounded-full">
             <a href="/chat">
               <span className="flex bg-blue_00 items-center justify-center h-16 w-16 rounded-full">
@@ -198,7 +199,7 @@ const Layout = (props: Props) => {
               </span>
             </a>
           </div>
-        )}
+        )} */}
       </Flex>
     </React.Fragment>
   );
