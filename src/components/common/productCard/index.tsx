@@ -69,7 +69,7 @@ const ProductCard = (props: any) => {
           <h3 className={styles.product_name}>{name || '<Chưa cập nhật>'}</h3>
           <span className={styles.box_price}>
             <span className={styles.product__price}>
-              {formatCurrency2(newPrice)}
+              {!isComingSoon && formatCurrency2(newPrice)}
             </span>
             {salePercent > 0 && (
               <span className={styles.product__price__old}>
