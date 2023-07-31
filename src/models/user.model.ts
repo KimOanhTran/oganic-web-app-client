@@ -5,6 +5,7 @@ export interface USER_MODEL extends MONGOOSE_MODEL {
   isEmailVerified: boolean;
   phone: string;
   email: string;
+  enable: boolean;
   name: string;
   favorites: Record<string, string>;
   chats: string[];

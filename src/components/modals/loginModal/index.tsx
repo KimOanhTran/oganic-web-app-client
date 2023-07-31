@@ -18,6 +18,7 @@ import API from '~/services/axiosClient';
 import { ReturnResponse } from '~/services/response.interface';
 
 interface IResLogin {
+  enable: boolean;
   user: USER_MODEL;
   tokens: ACCESS_REFRESH_TOKEN;
 }
@@ -46,8 +47,13 @@ const ModalLogin = () => {
           password: data.password,
         },
       });
-
       if (responseHasError(result.error)) throw new Error(result.message);
+
+      console.log(result);
+      if (result.data.user.enable === false) {
+        toast.error('Account Blocked!!');
+        return;
+      }
       toast.success('Đăng nhập thành công');
 
       setCookie(COOKIE_KEYS.ACCESS_TOKEN, result.data.tokens.access.token);
