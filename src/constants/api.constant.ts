@@ -1,6 +1,7 @@
 export const API_URL = {
   LOGIN: '/api/auth/login',
   LOGOUT: '/api/auth/logout',
+  FORGOTPASSWORD: '/api/auth/forgot-password',
   REGISTER: '/api/auth/register',
   PROFILE: '/api/auth/profile',
   CATEGORY_LIST: '/api/category/list',
