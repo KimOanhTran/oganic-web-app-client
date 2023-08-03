@@ -18,6 +18,7 @@ import API from '~/services/axiosClient';
 import { ReturnResponse } from '~/services/response.interface';
 
 interface IResLogin {
+  enable: boolean;
   user: USER_MODEL;
   tokens: ACCESS_REFRESH_TOKEN;
 }
@@ -32,6 +33,7 @@ const ModalLogin = () => {
     register,
     handleSubmit,
     formState: { errors },
+    getValues,
   } = useForm();
 
   const [type, setType] = React.useState(LoginType.PASSWORD);
@@ -46,8 +48,13 @@ const ModalLogin = () => {
           password: data.password,
         },
       });
-
       if (responseHasError(result.error)) throw new Error(result.message);
+
+      console.log(result);
+      if (result.data.user.enable === false) {
+        toast.error('Account Blocked!!');
+        return;
+      }
       toast.success('Đăng nhập thành công');
 
       setCookie(COOKIE_KEYS.ACCESS_TOKEN, result.data.tokens.access.token);
@@ -66,7 +73,7 @@ const ModalLogin = () => {
       await API.post<any>({
         url: API_URL.GET_OTP,
         body: {
-          username: data.username,
+          email: data.username,
         },
       });
 
@@ -74,6 +81,24 @@ const ModalLogin = () => {
       //   toast.success(result?.msg);
 
       window.location.href = `/nhap-otp?email_or_phone=${data.username}`;
+    } catch (error) {
+      toast.error(error?.message || error?.data?.message);
+    }
+  };
+
+  const handleForgotPasswordClick = async (email) => {
+    try {
+      await API.post<any>({
+        url: API_URL.FORGOTPASSWORD,
+        body: {
+          username: email,
+        },
+      });
+
+      //   if (responseHasError(result.error)) throw new Error(result.message);
+      //   toast.success(result?.msg);
+
+      // window.location.href = `/nhap-otp?email_or_phone=${email}`;
     } catch (error) {
       toast.error(error?.message || error?.data?.message);
     }
@@ -154,7 +179,12 @@ const ModalLogin = () => {
           >
             {type == LoginType.PASSWORD ? 'Đăng nhập' : 'Gửi mã OTP'}
           </button>
-          <a className="text-[#3c3cf5] cursor-pointer">Quên mật khẩu?</a>
+          <a
+            className="text-[#3c3cf5] cursor-pointer"
+            onClick={() => handleForgotPasswordClick(getValues('username'))}
+          >
+            Quên mật khẩu?
+          </a>
           <button
             type="button"
             onClick={() => {
