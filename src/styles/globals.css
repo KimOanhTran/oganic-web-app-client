@@ -37,6 +37,12 @@ body {
   padding-bottom: auto;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 /* MAX LINE */
 .max_line-1 {
   display: -webkit-box;

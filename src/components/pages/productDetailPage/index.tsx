@@ -38,6 +38,7 @@ const ProductDetailPage = (props: any) => {
     comments = [],
     name,
     desc,
+    supplier_name,
     colors = [],
     image_url,
     enable = true,
@@ -276,14 +277,18 @@ const ProductDetailPage = (props: any) => {
         </div>
         <div className="col-span-4">
           <div className={styles.productSpecification}>
-            <p className="text-[16px] font-semibold">Thông số kỹ thuật</p>
+            <p className="text-[16px] font-semibold">Thông tin sản phẩm</p>
             <div className="mt-2 border border-gray_C1 rounded-xl">
-              {specsList.map((e, i) => (
+              {/* {specsList.map((e, i) => (
                 <div key={i} className={styles.productSpecificationItem}>
                   <span>{e.label}</span>
                   <span>{e.value}</span>
                 </div>
-              ))}
+              ))} */}
+              <div className={styles.productSpecificationItem}>
+                <span>Nhà cung cấp</span>
+                <span>{supplier_name}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -400,12 +405,18 @@ const QuantityPicker = ({
   setQuantity: any;
 }) => {
   const handleIncrease = () => {
-    if (quantity === 5) return;
+    if (quantity === 10) return;
+    console.log(quantity);
     setQuantity(quantity + 1);
   };
   const handleDecrease = () => {
     if (quantity === 1) return;
+    console.log(quantity);
     setQuantity(quantity - 1);
+  };
+
+  const handleChange = (e) => {
+    setQuantity(parseInt(e.target.value));
   };
 
   return (
@@ -421,8 +432,14 @@ const QuantityPicker = ({
             </button>
           </div>
 
-          <div className="col-span-1 flex items-center justify-center">
-            <span className="text-[18px]">{quantity}</span>
+          <div className={`col-span-1 flex items-center justify-center`}>
+            {/* <span className="text-[18px]">{quantity}</span> */}
+            <input
+              type="number"
+              onChange={handleChange}
+              className="text-[18px] w-[100%] text-center"
+              value={quantity}
+            />
           </div>
           <div className="col-span-1 flex items-center justify-start">
             <button
