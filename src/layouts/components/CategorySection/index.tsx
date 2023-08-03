@@ -10,10 +10,11 @@ import { categoryURL } from '~/helpers/url.helper';
 
 type Props = {
   categories: Array<CATEGORY_MODEL>;
+  allCategories: Array<CATEGORY_MODEL>;
 };
 
 const CategorySection = (props: Props) => {
-  const { categories } = props;
+  const { categories, allCategories } = props;
 
   React.useEffect(() => {
     const _toggle = document.querySelector(`.${styles.all_categories__toggle}`);
@@ -52,7 +53,7 @@ const CategorySection = (props: Props) => {
                 <span className="text-[#fff]">Tất cả</span>
               </Flex>
               {/* all cates panel */}
-              <AllCatePanel categories={categories} />
+              <AllCatePanel categories={allCategories} />
             </Flex>
           </div>
           {categories?.map((cate, cateIndex) => (

@@ -33,6 +33,7 @@ const CartCount = dynamic(() => import('./components/cartCount'), {
 type Props = {
   children: React.ReactNode;
   categories?: Array<CATEGORY_MODEL>;
+  allCategories?: Array<CATEGORY_MODEL>;
 };
 
 const Layout = (props: Props) => {
@@ -171,7 +172,10 @@ const Layout = (props: Props) => {
             </div>
           </div>
           {/* Category section */}
-          <CategorySection categories={slicedCategories} />
+          <CategorySection
+            categories={slicedCategories}
+            allCategories={categories}
+          />
         </header>
         {/* body */}
         <main className="flex-grow">
