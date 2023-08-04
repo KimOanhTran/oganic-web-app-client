@@ -35,6 +35,7 @@ const CheckoutPage = (props) => {
   const [{ userInfo }] = useAuth();
   const [discountCode, setDiscountCode] = React.useState('');
   const [warningMessage, setWarningMessage] = React.useState('');
+  const [flagAddDiscount, setFlagAddDiscount] = React.useState(false);
 
   const {
     register,
@@ -112,22 +113,25 @@ const CheckoutPage = (props) => {
   const totalBill =
     (checkout?.total || 0) - (checkout?.discount || 0) + (checkout?.ship || 0);
 
-  const getDiscount = () => {
+  const getDiscount = async () => {
     const discount = getValues('discountCode');
-    setDiscountCode(discount);
-    toast.success('Áp dụng mã thành công');
-    handleGetDiscount({});
+    if (discount == '') {
+      toast.error('Vui lòng nhập mã giảm giá');
+    } else {
+      setDiscountCode(discount);
+      handleGetDiscount({});
+    }
   };
 
   const clearDiscount = () => {
     // const discount = getValues('discountCode');
     setValue('discountCode', '');
     setDiscountCode('');
-    toast.success('Hủy mã thành công');
+    // toast.success('Hủy mã thành công');
     handleGetDiscount({});
   };
 
-  const handleGetDiscount = ({ address = '' }: any) => {
+  const handleGetDiscount = async ({ address = '' }: any) => {
     const discount = getValues('discountCode');
     const province = getValues('province');
     const district = getValues('district');
@@ -158,10 +162,19 @@ const CheckoutPage = (props) => {
     }).then((res: any) => {
       const { cart_details, address, ...checkout } = res.data;
       setCheckout(checkout);
+      console.log(res?.warning);
       if (res?.warning) {
         if (discountCode) setDiscountCode('');
         setWarningMessage(res?.warning);
-      } else setWarningMessage('');
+        toast.error('Áp dụng mã không thành công');
+      } else {
+        setWarningMessage('');
+        if (res.addDiscount) {
+          toast.success('Áp dụng mã thành công');
+        } else {
+          toast.success('Hủy mã thành công');
+        }
+      }
     });
   };
 
@@ -260,7 +273,7 @@ const CheckoutPage = (props) => {
                   },
                 })}
                 id="email"
-                type="text"
+                type="email"
                 placeholder="Nhập email nhận hóa đơn"
                 className="px-[30px] h-[60px] rounded-[6px] border border-gray_D9 w-full outline-none"
               />
@@ -288,7 +301,7 @@ const CheckoutPage = (props) => {
                   },
                 })}
                 id="phone"
-                type="text"
+                type="number"
                 placeholder="Nhập số điện thoại nhận hàng"
                 className="px-[30px] h-[60px] rounded-[6px] border border-gray_D9 w-full outline-none"
               />
@@ -449,7 +462,7 @@ const CheckoutPage = (props) => {
                 <div className="h-[50px] mt-2 flex items-center justify-between px-4 py-1 bg-baseColor rounded-[6px]">
                   <div className="">{discountCode}</div>
                   <span
-                    className="text-gray_B9 cursor-pointer"
+                    className="text-white cursor-pointer"
                     onClick={clearDiscount}
                   >
                     Bỏ

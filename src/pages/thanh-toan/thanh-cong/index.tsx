@@ -19,7 +19,7 @@ const TransactionSuccess = (props: Props) => {
         </div>
         <div className={style.transactionBody}>
           <p>Thanh toán của bạn đã thành công</p>
-          <p>XIN CHÂN THÀNH CẢM ƠN QUÝ KHÁCH ĐÃ MUA HÀNG TẠI DABIT</p>
+          <p>XIN CHÂN THÀNH CẢM ƠN QUÝ KHÁCH ĐÃ MUA HÀNG TẠI OganicShop</p>
           <button className={style.btnTransaction} onClick={handleSubmit}>
             Trở về trang chủ
           </button>

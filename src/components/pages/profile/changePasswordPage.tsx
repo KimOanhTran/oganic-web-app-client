@@ -6,6 +6,7 @@ import ErrorText from '~/components/common/errorText';
 import { PASSWORD_REGEX } from '~/constants/regex.constants';
 import Layout from '~/layouts/Layout';
 import ProfilePageFrame from './components/profilePageFrame';
+import { error } from 'console';
 
 const ChangePasswordPage = (props) => {
   const {
@@ -17,7 +18,7 @@ const ChangePasswordPage = (props) => {
   const handleChangePassword = (data) => {
     console.log(data);
   };
-
+  console.log(errors);
   return (
     <>
       <Head>
@@ -106,13 +107,17 @@ const PasswordInput = ({
     <div className="flex items-center h-[48px] border border-gray_F1 rounded-xl px-3 ">
       <input
         {...register(name, {
-          required: 'Vui lòng nhập mật khẩu',
-          pattern: {
-            value: PASSWORD_REGEX,
-            message: 'Ít nhất 8 ký tự, ít nhất 1 số và 1 chữ cái',
+          required: {
+            value: true,
+            message: 'Vui lòng nhập mật khẩu',
           },
-          ...validate,
+          // pattern: {
+          //   value: PASSWORD_REGEX,
+          //   message: 'Ít nhất 8 ký tự, ít nhất 1 số và 1 chữ cái',
+          // },
+          // ...validate,
         })}
+        // required={'Vui lòng nhập mật khẩu'}
         id={name}
         type="password"
         ref={refInput}
