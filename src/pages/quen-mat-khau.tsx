@@ -1,6 +1,6 @@
 import { IconNumber1 } from '@tabler/icons';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import ErrorText from '~/components/common/errorText';
@@ -22,28 +22,16 @@ function InputOTP() {
 
   const { query } = useRouter();
 
-  const email_or_phone = query?.['email_or_phone'] as string;
+  const [sended, setSended] = useState(false);
 
-  const handleCheckOTP = async (data: any) => {
-    try {
-      const result = await API.post<ReturnResponse<any>>({
-        url: API_URL.CHECK_OTP,
-        body: {
-          username: email_or_phone,
-          code: data.code,
-        },
-      });
+  const sendEmailForgetPassword = async (data: any) => {
+    setSended(true);
+    console.log(sended);
+  };
 
-      if (responseHasError(result.error)) throw new Error(result.message);
-      toast.success('Đăng nhập bằng mã otp thành công');
-
-      setCookie(COOKIE_KEYS.ACCESS_TOKEN, result.data.tokens.access.token);
-      setCookie(COOKIE_KEYS.REFRESH_TOKEN, result.data.tokens.refresh.token);
-
-      window.location.href = '/';
-    } catch (error) {
-      toast.error(error?.message || error?.data?.message);
-    }
+  const goHomePage = (e) => {
+    e.preventDefault();
+    window.location.href = '/';
   };
 
   return (
@@ -58,33 +46,46 @@ function InputOTP() {
             />
           </a>
         </Flex>
-        <form
-          onSubmit={handleSubmit(handleCheckOTP)}
-          className="flex flex-col w-[250px]"
-        >
-          <Flex
-            className="py-[5px] h-[40px] gap-3 border border-[#c3c3c3] rounded-lg"
-            alignItem="center"
+        {!sended ? (
+          <form
+            onSubmit={handleSubmit(sendEmailForgetPassword)}
+            className="flex flex-col w-[250px]"
           >
-            {/* <IconNumber1 size={20} /> */}
-            <input
-              {...register('code', {
-                required: 'Vui lòng nhập email',
-              })}
-              type="email"
-              className="border-none outline-none bg-transparent flex-1 pl-3"
-              placeholder="Nhập email để lấy lại mật khẩu"
-            />
-          </Flex>
-          {errors?.code && <ErrorText text={errors?.code.message} />}
+            <Flex
+              className="py-[5px] h-[40px] gap-3 border border-[#c3c3c3] rounded-lg"
+              alignItem="center"
+            >
+              {/* <IconNumber1 size={20} /> */}
+              <input
+                {...register('code', {
+                  required: 'Vui lòng nhập email',
+                })}
+                type="email"
+                className="border-none outline-none bg-transparent flex-1 pl-3"
+                placeholder="Nhập email để lấy lại mật khẩu"
+              />
+            </Flex>
+            {errors?.code && <ErrorText text={errors?.code.message} />}
 
-          <button
-            type="submit"
-            className="py-[5px] h-[40px] bg-[#000] text-[#fff] rounded mt-5"
-          >
-            Gửi
-          </button>
-        </form>
+            <button
+              type="submit"
+              className="py-[5px] h-[40px] bg-[#000] text-[#fff] rounded mt-5"
+            >
+              Gửi
+            </button>
+          </form>
+        ) : (
+          <div>
+            <h3>Check email de reset password</h3>
+            <button
+              onClick={goHomePage}
+              // type="submit"
+              className="py-[5px] h-[40px] bg-[#000] text-[#fff] rounded mt-5"
+            >
+              Bấm về trang chủ
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -22,28 +22,14 @@ function InputOTP() {
 
   const { query } = useRouter();
 
-  const email_or_phone = query?.['email_or_phone'] as string;
+  const token = query?.['token'] as string;
 
-  const handleCheckOTP = async (data: any) => {
-    try {
-      const result = await API.post<ReturnResponse<any>>({
-        url: API_URL.CHECK_OTP,
-        body: {
-          username: email_or_phone,
-          code: data.code,
-        },
-      });
-
-      if (responseHasError(result.error)) throw new Error(result.message);
-      toast.success('Đăng nhập bằng mã otp thành công');
-
-      setCookie(COOKIE_KEYS.ACCESS_TOKEN, result.data.tokens.access.token);
-      setCookie(COOKIE_KEYS.REFRESH_TOKEN, result.data.tokens.refresh.token);
-
+  console.log(token);
+  const resetPassword = async (data: any) => {
+    toast.success('Cập nhật mk thành công !!');
+    setTimeout(() => {
       window.location.href = '/';
-    } catch (error) {
-      toast.error(error?.message || error?.data?.message);
-    }
+    }, 1000);
   };
 
   return (
@@ -59,7 +45,7 @@ function InputOTP() {
           </a>
         </Flex>
         <form
-          onSubmit={handleSubmit(handleCheckOTP)}
+          onSubmit={handleSubmit(resetPassword)}
           className="flex flex-col w-[250px]"
         >
           <Flex

@@ -88,17 +88,17 @@ const ModalLogin = () => {
 
   const handleForgotPasswordClick = async (email) => {
     try {
-      await API.post<any>({
-        url: API_URL.FORGOTPASSWORD,
-        body: {
-          username: email,
-        },
-      });
+      // await API.post<any>({
+      //   url: API_URL.FORGOTPASSWORD,
+      //   body: {
+      //     username: email,
+      //   },
+      // });
 
       //   if (responseHasError(result.error)) throw new Error(result.message);
       //   toast.success(result?.msg);
 
-      // window.location.href = `/nhap-otp?email_or_phone=${email}`;
+      window.location.href = `/quen-mat-khau`;
     } catch (error) {
       toast.error(error?.message || error?.data?.message);
     }

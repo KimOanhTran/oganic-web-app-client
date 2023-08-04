@@ -93,22 +93,31 @@ const AllCatePanel = ({ categories = [] }: Props) => {
                 key={cateIndex}
                 onMouseEnter={() => setCate(_cate)}
               >
-                <Flex
-                  alignItem="center"
-                  className={`h-full gap-2 justify-between`}
-                >
-                  <Flex alignItem="center" className="gap-2">
-                    <span className="h-[24px] w-[24px] relative">
-                      <img
-                        src={_cate?.icon_url || ''}
-                        alt="category_icon"
-                        className="h-full w-full object-contain"
+                <Link href={categoryURL(_cate.name)}>
+                  <a>
+                    <Flex
+                      alignItem="center"
+                      className={`h-full gap-2 justify-between`}
+                    >
+                      <Flex alignItem="center" className="gap-2">
+                        <span className="h-[24px] w-[24px] relative">
+                          <img
+                            src={_cate?.icon_url || ''}
+                            alt="category_icon"
+                            className="h-full w-full object-contain"
+                          />
+                        </span>
+
+                        <span className="text-[#000]">{_cate.name}</span>
+                      </Flex>
+                      <IconChevronRight
+                        size={20}
+                        strokeWidth={2}
+                        color={'#000'}
                       />
-                    </span>
-                    <span className="text-[#000]">{_cate.name}</span>
-                  </Flex>
-                  <IconChevronRight size={20} strokeWidth={2} color={'#000'} />
-                </Flex>
+                    </Flex>
+                  </a>
+                </Link>
               </li>
             ))}
           </ul>
