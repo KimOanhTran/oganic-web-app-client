@@ -1,6 +1,6 @@
 import { IconNumber1 } from '@tabler/icons';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import ErrorText from '~/components/common/errorText';
@@ -21,15 +21,31 @@ function InputOTP() {
   } = useForm();
 
   const { query } = useRouter();
-
+  const [sended, setSended] = useState(false);
   const token = query?.['token'] as string;
 
   console.log(token);
   const resetPassword = async (data: any) => {
-    toast.success('Cập nhật mk thành công !!');
-    setTimeout(() => {
-      window.location.href = '/';
-    }, 1000);
+    try {
+      console.log(data);
+      const result = await API.post<any>({
+        url: API_URL.RESETPASSWORD(token),
+        body: {
+          // token: token,
+          password: data.password,
+        },
+      });
+      console.log(result);
+      if (result.status !== 204) throw new Error(result.message);
+      setSended(true);
+      toast.success('Cập nhật mk thành công !!');
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 1000);
+    } catch (error) {
+      setSended(false);
+      toast.error(error?.message || error?.data?.message);
+    }
   };
 
   return (
@@ -54,15 +70,15 @@ function InputOTP() {
           >
             {/* <IconNumber1 size={20} /> */}
             <input
-              {...register('code', {
-                required: 'Vui lòng nhập email',
+              {...register('password', {
+                required: 'Vui lòng nhập mật khẩu',
               })}
               type="password"
               className="border-none outline-none bg-transparent flex-1 pl-3"
               placeholder="Nhập mật khẩu mới"
             />
           </Flex>
-          {errors?.code && <ErrorText text={errors?.code.message} />}
+          {errors?.password && <ErrorText text={errors?.password.message} />}
 
           <button
             type="submit"

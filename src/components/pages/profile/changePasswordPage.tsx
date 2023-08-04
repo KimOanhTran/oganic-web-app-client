@@ -13,10 +13,12 @@ const ChangePasswordPage = (props) => {
     register,
     handleSubmit,
     formState: { errors },
+    getValues,
   } = useForm();
 
   const handleChangePassword = (data) => {
-    console.log(data);
+    const { oldPassword, newPassword, confirmPassword } = data;
+    console.log(oldPassword, newPassword, confirmPassword);
   };
   console.log(errors);
   return (
@@ -40,7 +42,7 @@ const ChangePasswordPage = (props) => {
                     <label htmlFor="oldPassword">Mật khẩu cũ</label>
                     <PasswordInput
                       register={register}
-                      name={'oldPassword'}
+                      name="oldPassword"
                       placeholder="Nhập mật khẩu"
                     />
                     {errors?.oldPassword && (
@@ -51,7 +53,7 @@ const ChangePasswordPage = (props) => {
                     <label htmlFor="newPassword">Mật khẩu mới</label>
                     <PasswordInput
                       register={register}
-                      name={'newPassword'}
+                      name="newPassword"
                       placeholder="Nhập mật khẩu"
                     />
                     {errors?.newPassword && (
@@ -64,8 +66,13 @@ const ChangePasswordPage = (props) => {
                     </label>
                     <PasswordInput
                       register={register}
-                      name={'confirmPassword'}
+                      name="confirmPassword"
                       placeholder="Nhập mật khẩu"
+                      validate={{
+                        validate: (value) =>
+                          value === getValues('newPassword') ||
+                          'Mật khẩu không khớp',
+                      }}
                     />
                     {errors?.confirmPassword && (
                       <ErrorText text={errors['confirmPassword'].message} />
@@ -89,12 +96,7 @@ const ChangePasswordPage = (props) => {
   );
 };
 
-const PasswordInput = ({
-  register,
-  name,
-  placeholder = '',
-  validate = {},
-}: any) => {
+const PasswordInput = ({ register, name, placeholder = '', validate = {} }) => {
   const [showPass, setShowPass] = React.useState(false);
   const refInput = React.useRef(null);
 

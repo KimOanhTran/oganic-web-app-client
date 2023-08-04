@@ -162,18 +162,23 @@ const ProductDetailPage = (props: any) => {
             {/* Price */}
             <div className="flex items-center gap-4">
               <p className="text-[22px] text-yellow_E3 font-bold">
-                {formatCurrency2(newPrice)}
+                {!isComingSoon && formatCurrency2(newPrice)}
               </p>
               {salePercent > 0 && (
                 <p className="text-[16px] text-dark_3 font-semibold">
-                  <span className="line-through">{formatCurrency2(price)}</span>
+                  <span className="line-through">
+                    {' '}
+                    {!isComingSoon && formatCurrency2(newPrice)}
+                  </span>
                   <span className="ml-4 text-error">Giảm {salePercent}%</span>
                 </p>
               )}
             </div>
             {/* Colors */}
             <div className="mt-2">
-              <span className="text-gray_C1 font-semibold text-sm">Màu</span>
+              <span className="text-gray_C1 font-semibold text-sm">
+                Tên sản phẩm
+              </span>
               <div className="grid grid-cols-3 gap-2 items-center bg-white">
                 {colors.map((e, i) => {
                   const active = currentColor?._id === e._id;
