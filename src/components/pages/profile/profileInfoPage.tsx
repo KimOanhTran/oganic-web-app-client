@@ -194,13 +194,15 @@ const ModalChangePhone = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  const [{ userInfo }] = useAuth();
   const handleReview = async (data) => {
     try {
+      console.log(userInfo.email);
       const result = await API.post<any>({
         url: API_URL.UPDATE_CHANGE_PHONE,
         headers: { ...getAuthHeader() },
         body: {
+          user: userInfo.email,
           phone: data.phone,
         },
       });

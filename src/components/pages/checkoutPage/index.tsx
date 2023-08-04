@@ -369,9 +369,7 @@ const CheckoutPage = (props) => {
                 return (
                   <div className="border-b-[1px] border-b-gray_D9" key={index}>
                     <div className="flex items-start justify-between pt-[15px]">
-                      <span className="text-[18px]">
-                        {item.name} ({item?.color})
-                      </span>
+                      <span className="text-[18px]">{item.name}</span>
                       <span className="text-[18px]">
                         {formatCurrency2(totalPrice)}
                       </span>

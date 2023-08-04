@@ -27,7 +27,7 @@ const Filter = (props) => {
       <p className="my-2 text-gray_B9 font-semibold">Bộ lọc</p>
       <div className="flex flex-wrap gap-2 items-center bg-white">
         <FilterDropdown
-          nameFilter="Màu"
+          nameFilter="Sản phẩm"
           showDropdown
           dropdownContent={<ColorsFilter colors={colors} />}
           icon={<IconColorPicker stroke={2} color="#000" size={22} />}
