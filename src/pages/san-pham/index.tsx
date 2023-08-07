@@ -110,6 +110,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       params: { ...getQueryURL(query) },
     });
 
+    console.log(productList.data.data);
+
     const data = await Promise.all([
       categories,
       cateInfo,

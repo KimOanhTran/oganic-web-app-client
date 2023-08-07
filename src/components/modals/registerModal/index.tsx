@@ -53,8 +53,15 @@ const ModalRegister = () => {
 
         if (responseHasError(result.error)) throw new Error(result.message);
 
-        setCookie(COOKIE_KEYS.ACCESS_TOKEN, result.data.tokens.access.token);
-        setCookie(COOKIE_KEYS.REFRESH_TOKEN, result.data.tokens.refresh.token);
+        await API.post<ReturnResponse<IResRegister>>({
+          url: API_URL.VERIFY_EMAIL,
+          body: {
+            ...payload,
+          },
+        });
+
+        // setCookie(COOKIE_KEYS.ACCESS_TOKEN, result.data.tokens.access.token);
+        // setCookie(COOKIE_KEYS.REFRESH_TOKEN, result.data.tokens.refresh.token);
 
         toast.success('Đăng ký thành công');
 

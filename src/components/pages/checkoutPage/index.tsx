@@ -36,6 +36,7 @@ const CheckoutPage = (props) => {
   const [discountCode, setDiscountCode] = React.useState('');
   const [warningMessage, setWarningMessage] = React.useState('');
   const [flagAddDiscount, setFlagAddDiscount] = React.useState(false);
+  const [flagChangeAddress, setFlagChangeAddress] = React.useState(true);
 
   const {
     register,
@@ -127,6 +128,7 @@ const CheckoutPage = (props) => {
     // const discount = getValues('discountCode');
     setValue('discountCode', '');
     setDiscountCode('');
+    setFlagChangeAddress(false);
     // toast.success('Hủy mã thành công');
     handleGetDiscount({});
   };
@@ -166,12 +168,14 @@ const CheckoutPage = (props) => {
       if (res?.warning) {
         if (discountCode) setDiscountCode('');
         setWarningMessage(res?.warning);
-        toast.error('Áp dụng mã không thành công');
+        console.log(res?.warning == 'Địa chỉ thiếu. ');
+        if (res?.warning != 'Địa chỉ thiếu. ')
+          toast.error('Áp dụng mã không thành công');
       } else {
         setWarningMessage('');
         if (res.addDiscount) {
           toast.success('Áp dụng mã thành công');
-        } else {
+        } else if (!res.addDiscount && !flagChangeAddress) {
           toast.success('Hủy mã thành công');
         }
       }
@@ -179,6 +183,7 @@ const CheckoutPage = (props) => {
   };
 
   const handleChangeAddress = useDebounce((e) => {
+    setFlagChangeAddress(true);
     handleGetDiscount({ address: e.target.value });
   }, 400);
 
