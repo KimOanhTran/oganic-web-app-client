@@ -119,6 +119,7 @@ const CheckoutPage = (props) => {
     if (discount == '') {
       toast.error('Vui lòng nhập mã giảm giá');
     } else {
+      console.log('discount', discount);
       setDiscountCode(discount);
       handleGetDiscount({});
     }
@@ -220,10 +221,13 @@ const CheckoutPage = (props) => {
         window.location.href = '/thanh-toan/thanh-cong';
       if (result?.data && data.payment === 'vnpay')
         window.location.href = result?.data;
+      if (result.status === 400) {
+        toast.error('Sản phẩm đã hết số lượng tồn');
+      }
 
       clearCart();
     } catch (error) {
-      toast.error('Có lỗi thanh toán', error);
+      toast.error('Có lỗi thanh toán: ' + error.message); // Hiển thị thông báo lỗi có thông điệp từ đối tượng error
       setLoading(false);
       console.log('err,', error);
     }

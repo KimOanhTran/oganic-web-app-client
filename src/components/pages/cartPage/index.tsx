@@ -63,7 +63,7 @@ const CartSection = (props) => {
     ({ product, color, quantity = 1 }) => {
       const item = cart.find((e) => e.product === product && e.color === color);
       const preCount = item.quantity + quantity;
-      if (preCount < 1 || preCount > 5) return;
+      if (preCount < 1) return;
 
       changeItemQuantity({
         product,
