@@ -149,10 +149,10 @@ const OrderTrackingPage = (props: any) => {
                     >
                       {nameProduct}
                     </a>
-                    <div className="mt-1">
+                    {/* <div className="mt-1">
                       <span className="font-semibold">Màu: </span>
                       {colorProduct}
-                    </div>
+                    </div> */}
                     {sale > 0 && (
                       <div className="mt-1">
                         <span className="font-normal text-error">

@@ -38,6 +38,7 @@ const CheckoutPage = (props) => {
   const [flagAddDiscount, setFlagAddDiscount] = React.useState(false);
   const [flagChangeAddress, setFlagChangeAddress] = React.useState(true);
 
+  //sd react-hook-form để quản lý form
   const {
     register,
     formState: { errors },
@@ -82,16 +83,20 @@ const CheckoutPage = (props) => {
   //   const router = useRouter();
 
   React.useEffect(() => {
+    //nếu người dùng đã đăng nhập và có dl trong giỏ hàng
     if (userCartData) {
+      //trích xuất thông tin về sp trong giỏ hàng từ userCartData
       const { cart_details, address, ...checkout } = userCartData;
       setCart(cart_details || []);
       setCheckout(checkout);
       return;
     }
     // user not login
+    //Nễu người dùng không đăng nhập nhưng có thông tin trong giỏ hàng trong local storage
     const localCart =
       getFromLocalStorage<Array<any>>(LOCAL_STORAGE_KEY.CART_PRODUCT_KEY) || [];
     if (localCart && localCart?.length > 0) {
+      //Tính toán giá trị đơn hàng bằng hàm calculateCartBill
       calculateCartBill({
         payload: {
           cart: localCart,
@@ -110,10 +115,13 @@ const CheckoutPage = (props) => {
     }
   }, []);
 
+  //được tính dựa trên tổng tiền đơn hàng trước khi áp dụng giảm giá
   const initialBill = checkout?.total || 0;
+  //Tính giá trị tổng bill bao gồm cả giảm giá và phí ship
   const totalBill =
     (checkout?.total || 0) - (checkout?.discount || 0) + (checkout?.ship || 0);
 
+  //Hàm xử lý khi người dùng ấn nút áp dụng mã giảm giá
   const getDiscount = async () => {
     const discount = getValues('discountCode');
     if (discount == '') {
@@ -134,6 +142,7 @@ const CheckoutPage = (props) => {
     handleGetDiscount({});
   };
 
+  //Xử lý logic tính toán giảm giá và phí vận chuyển dựa trên địa chỉ giao hàng
   const handleGetDiscount = async ({ address = '' }: any) => {
     const discount = getValues('discountCode');
     const province = getValues('province');
@@ -188,6 +197,7 @@ const CheckoutPage = (props) => {
     handleGetDiscount({ address: e.target.value });
   }, 400);
 
+  //xử lý logic khi người dùng nhấn nút tiến hành thanh toán
   const handleCheckout = async (data, e) => {
     e.preventDefault();
     setLoading(true);

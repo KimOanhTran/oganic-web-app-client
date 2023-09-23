@@ -196,9 +196,9 @@ const CartItem = (props) => {
             {name || '<Chưa cập nhật>'}
           </a>
         </Link>
-        <p className="text-sm italic text-dark_3">
+        {/* <p className="text-sm italic text-dark_3">
           <span className="text-gray_B9">Màu:</span> {color}
-        </p>
+        </p> */}
         {salePercent > 0 && (
           <span className="text-sm italic text-error bg-gray_F1 w-fit p-1 rounded-full">
             <span className="text-error">Giảm giá:</span> {salePercent}%
